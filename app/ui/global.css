@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: theme('colors.white'); 
+  color: theme('colors.black'); 
+}
+
+h1 {
+  font-size: theme('fontSize.4xl');  
+}
+
+h2 {
+  font-size: theme('fontSize.3xl');
+}
+
+h3 {
+  font-size: theme('fontSize.2xl'); 
+}
+
+h4, h5, h6 {
+  font-size: theme('fontSize.xl');  
+}
+
+p {
+  font-size: theme('fontSize.base');  
+}
+
+a {
+  color: theme('colors.blue.400'); 
+}
+
+button {
+  background-color: theme('colors.blue.400'); 
+  color: theme('colors.white');  
+}
+
+.alert {
+  background-color: theme('colors.yellow');
+  color: theme('colors.black'); 
+}
