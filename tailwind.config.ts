@@ -7,6 +7,9 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    boxShadow: {
+      custom: '0 0 3.6px rgba(0, 0, 0, 0.25)',
+    },
     colors: {
       blue: {
         400: '#009EFF',
@@ -19,14 +22,15 @@ const config: Config = {
       black: '#484848',
     },
     fontSize: {
-      xs: '12px', 
-      sm: '14px', 
+      xs: '12px',
+      sm: '14px',
       base: '16px',
       lg: '18px',
       xl: '24px',
       '2xl': '32px',
       '3xl': '36px',
       '4xl': '48px',
+      '10xl': '128px',
     },
   },
   plugins: [],

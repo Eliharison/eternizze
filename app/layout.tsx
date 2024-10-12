@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${comfortaa.className}`}>{children}</body>
+      <body className={`${comfortaa.className} container mx-auto bg-white`}>{children}</body>
     </html>
   );
 }

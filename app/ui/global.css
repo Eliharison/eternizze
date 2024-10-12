@@ -25,6 +25,7 @@ h4, h5, h6 {
 
 p {
   font-size: theme('fontSize.base');  
+  line-height: 1.25rem
 }
 
 a {
