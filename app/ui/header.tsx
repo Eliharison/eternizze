@@ -22,7 +22,7 @@ export default function Header() {
       </div>
       <div className="flex justify-end items-center">
         <Link
-          href="/login"
+          href="/construction"
           className="items-center col-span-2 gap-5 rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
         >
           <span>Log in</span>
