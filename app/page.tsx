@@ -9,7 +9,7 @@ export default function Home() {
       <div className='p-5 xl:p-0' >
         <Banner
           src="/banner.png"
-          title="Tributo ao meu Amor"
+          title="Dedicatória ao meu Amor"
           subtitle="Aqui fica nossa historia"
         />
         <main className="mt-6 mx-auto flex flex-col lg:flex-row justify-around gap-[25px]">
