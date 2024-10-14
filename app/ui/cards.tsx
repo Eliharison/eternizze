@@ -10,7 +10,7 @@ interface CardProps {
 
 export function Card({ title, subtitle, link }: CardProps) {
   return (
-    <div className=" xl:w-[320px] h-[215px] p-[21px] bg-white rounded-[25px] shadow-custom transition-transform duration-300 hover:scale-105">
+    <div className="xl:w-[320px] h-[215px] p-[21px] bg-white rounded-[25px] shadow-custom transition-transform duration-300 hover:scale-105">
       <a href={link}>
         <h5
           className={`mb-2 ${quicksand.className} tracking-tight text-black text-lg sm:text-xl`}
@@ -19,7 +19,7 @@ export function Card({ title, subtitle, link }: CardProps) {
         </h5>
       </a>
       <p className="mb-3 text-sm sm:text-base text-gray-700 dark:text-gray-400 overflow-hidden text-ellipsis h-[76px]">
-        {subtitle} 
+        {subtitle}
       </p>
       <Link
         href={link}

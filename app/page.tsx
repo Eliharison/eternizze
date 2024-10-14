@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className='p-5 xl:p-0' >
+      <div className='px-5 pb-5 xl:p-0' >
         <Banner
           src="/banner.png"
           title="Dedicatória ao meu Amor"
