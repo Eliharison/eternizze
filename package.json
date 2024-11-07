@@ -10,11 +10,21 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.4",
+    "@vercel/postgres": "^0.10.0",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.15",
+    "next-auth": "^5.0.0-beta.25",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^11.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/next-auth": "^3.13.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
