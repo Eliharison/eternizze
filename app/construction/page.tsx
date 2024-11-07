@@ -1,5 +1,5 @@
 import { quicksand } from '@/app/ui/fonts';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 
 export default function Construction() {
