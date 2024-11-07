@@ -85,34 +85,3 @@ export async function GET() {
     return Response.json({ error }, { status: 500 });
   }
 }
-
-// Endpoint para buscar uma história pelo ID
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export async function GET_STORY(request: NextApiRequest, response: NextApiResponse) {
-  // Extraia o ID da URL
-  const { id } = request.query;
-
-  // Verifique se o ID é uma string
-  if (typeof id !== 'string') {
-    return response.status(400).json({ error: 'Invalid ID format' });
-  }
-
-  try {
-    const result = await client.sql`
-      SELECT * FROM stories WHERE id = ${id};
-    `;
-
-    if (result.rowCount === 0) {
-      return response.status(404).json({ error: 'Story not found' });
-    }
-
-    return response.status(200).json(result.rows[0]);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      return response.status(500).json({ error: error.message });
-    } else {
-      return response.status(500).json({ error: 'Internal server error' });
-    }
-  }
-}
