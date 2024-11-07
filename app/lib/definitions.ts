@@ -1,4 +1,5 @@
 export type User = {
+  [x: string]: string;
   id: string; // UUID
   username: string;
   email: string;
@@ -13,6 +14,7 @@ export type Story = {
   coverImageUrl?: string;
   createdAt: Date;
   updatedAt: Date;
+  visibility: 'public' | 'private';
   authorId: string; // FK referencing User
 };
 

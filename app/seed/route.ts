@@ -1,6 +1,6 @@
 import { db } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
-import { users, stories } from '@/app/lib/placeholder-data'; // dados iniciais para a seed
+import { users, stories } from '@/app/lib/placeholder-data';
 
 const client = await db.connect();
 
@@ -34,6 +34,16 @@ async function seedUsers() {
 
 // Função para seedar histórias
 async function seedStories() {
+  // Define o tipo ENUM para visibilidade, se ele não existir
+  await client.sql`
+    DO $$ 
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'story_visibility') THEN
+        CREATE TYPE story_visibility AS ENUM ('public', 'private');
+      END IF;
+    END$$;
+  `;
+
   await client.sql`
     CREATE TABLE IF NOT EXISTS stories (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -43,15 +53,16 @@ async function seedStories() {
       cover_image_url TEXT,
       created_at TIMESTAMPTZ DEFAULT NOW(),
       updated_at TIMESTAMPTZ DEFAULT NOW(),
-      author_id UUID REFERENCES users(id) ON DELETE SET NULL
+      author_id UUID REFERENCES users(id) ON DELETE SET NULL,
+      visibility story_visibility DEFAULT 'public'
     );
   `;
 
   const insertedStories = await Promise.all(
     stories.map(
       (story) => client.sql`
-        INSERT INTO stories (id, title, subtitle, content, cover_image_url, author_id)
-        VALUES (${story.id}, ${story.title}, ${story.subtitle}, ${story.content}, ${story.cover_image_url}, ${story.author_id})
+        INSERT INTO stories (id, title, subtitle, content, cover_image_url, author_id, visibility)
+        VALUES (${story.id}, ${story.title}, ${story.subtitle}, ${story.content}, ${story.cover_image_url}, ${story.author_id}, ${story.visibility})
         ON CONFLICT (id) DO NOTHING;
       `,
     ),
@@ -59,7 +70,6 @@ async function seedStories() {
 
   return insertedStories;
 }
-
 
 // Endpoint para seeding do banco de dados
 export async function GET() {
@@ -106,6 +116,3 @@ export async function GET_STORY(request: NextApiRequest, response: NextApiRespon
     }
   }
 }
-
-
-

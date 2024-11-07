@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import { quicksand } from '@/app/ui/fonts';
 
 interface BannerProps {
@@ -13,7 +13,7 @@ export default function Banner({ src, title, subtitle }: BannerProps) {
       <Image
         src={src}
         alt="Banner"
-        layout='fill'
+        layout="fill"
         quality={100}
         className="z-[-1] rounded-xl object-cover"
       />

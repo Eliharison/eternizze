@@ -24,6 +24,7 @@ export const stories = [
       'Foi o nosso primeiro encontro romântico para um restaurante, aqui realmente foi um dos dias mais marcantes',
     content: 'Detalhes completos sobre o nosso primeiro encontro romântico...',
     cover_image_url: '/images/encontro_romantico.jpg',
+    visibility: 'private',
     author_id: users[0].id,
   },
   {
@@ -33,6 +34,7 @@ export const stories = [
       'Um role no Sushi Satoshi onde comemos muito e demos muito prejuízo!',
     content: 'A história completa do nosso dia no Sushi Satoshi...',
     cover_image_url: '/images/comida_japonesa.jpg',
+    visibility: 'private',
     author_id: users[0].id,
   },
   {
@@ -42,6 +44,7 @@ export const stories = [
     content:
       'Narrativa completa de como foi nossa formatura e as situações engraçadas...',
     cover_image_url: '/images/formatura.jpg',
+    visibility: 'public',
     author_id: users[0].id,
   },
   {
@@ -50,6 +53,7 @@ export const stories = [
     subtitle: 'Uma coisa linda de se ver! perto do banheiro do bar..',
     content: 'A história divertida e inesperada do nosso primeiro beijo...',
     cover_image_url: '/images/primeiro_beijo.jpg',
+    visibility: 'public',
     author_id: users[0].id,
   },
   {
@@ -59,6 +63,7 @@ export const stories = [
     content:
       'Os detalhes do pedido de namoro e como as coisas não saíram como planejado...',
     cover_image_url: '/images/pedido_namoro.jpg',
+    visibility: 'public',
     author_id: users[0].id,
   },
   {
@@ -67,6 +72,7 @@ export const stories = [
     subtitle: 'Aqui a mulher não esperava o que à aguardava...',
     content: 'Um dia dos namorados surpreendente, com muitas emoções...',
     cover_image_url: '/images/dia_namorados.jpg',
+    visibility: 'public',
     author_id: users[0].id,
   },
   {
@@ -77,6 +83,7 @@ export const stories = [
     content:
       'A jornada de como passamos na faculdade e o que isso significou para nós...',
     cover_image_url: '/images/faculdade.jpg',
+    visibility: 'public',
     author_id: users[0].id,
   },
   {
@@ -86,6 +93,7 @@ export const stories = [
       'Aqui você vai descobrir quem e como foi esse momento decisivo em nosso relacionamento.',
     content: 'A revelação de como nos conhecemos e quem tomou a iniciativa...',
     cover_image_url: '/images/quem_chegou.jpg',
+    visibility: 'public',
     author_id: users[1].id,
   },
 ];

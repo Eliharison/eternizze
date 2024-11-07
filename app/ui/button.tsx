@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 
 interface ButtonLinkProps {
   href: string;
@@ -18,7 +18,8 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   size = 'md',
   className = '',
 }) => {
-  const baseStyles = 'flex justify-center items-center rounded-lg transition-colors';
+  const baseStyles =
+    'flex justify-center items-center rounded-lg transition-colors';
   const sizeStyles = {
     sm: 'w-[100px] h-[35px] px-3 py-2 text-sm',
     md: 'w-[120px] h-[40px] sm:h-[50px] px-4 py-3 text-base',
@@ -37,7 +38,9 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
       className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
     >
       <span>{label}</span>
-      {icon && <Image src={icon} width={12} height={24} alt="Icon" className="ml-2" />}
+      {icon && (
+        <Image src={icon} width={12} height={24} alt="Icon" className="ml-2" />
+      )}
     </Link>
   );
 };

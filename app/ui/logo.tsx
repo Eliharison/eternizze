@@ -6,8 +6,8 @@ interface PropWidth {
 
 const textSizeMap = {
   '4xl': 'text-4xl',
-  '8xl': 'text-8xl',
-  '10xl': 'text-10xl',
+  '8xl': 'md:text-8xl',
+  '10xl': 'md:text-10xl',
 };
 
 export default function Logo({ width }: PropWidth) {

@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 // Schema de validação para uma história
 const StorySchema = z.object({
@@ -28,16 +30,41 @@ export type State = {
   message?: string | null;
 };
 
+export async function findUserByEmail(email: string) {
+  const user = await sql`
+    SELECT * FROM users WHERE email = ${email}
+  `;
+  return user.rows[0]; // Retorna o primeiro usuário encontrado
+}
+
+// Função para validar credenciais
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
+
 // Função para buscar todas as histórias
 export async function getStories() {
-  try {
-    const stories = await sql`
-      SELECT * FROM stories ORDER BY created_at DESC;
-    `;
-    return stories.rows;
-  } catch (error) {
-    throw new Error(`Erro ao buscar histórias. Erro: ${error}`);
-  }
+  const stories = await sql`
+    SELECT id, title, subtitle, visibility, created_at
+    FROM stories
+    ORDER BY created_at DESC;
+  `;
+  return stories.rows;
 }
 
 // Função para buscar uma história específica pelo ID

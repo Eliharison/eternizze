@@ -2,9 +2,20 @@ import Header from '@/app/ui/header';
 import Banner from '@/app/ui/banner';
 import { Card, MediumCard, LargeCard } from '@/app/ui/cards';
 import { getStories } from '@/app/lib/actions';
+import { auth } from '../auth'; // Importe o `auth` diretamente
 
 export default async function Home() {
   const stories = await getStories();
+  const session = await auth(); // Verifica a sessão autenticada
+  const isLoggedIn = !!session?.user;
+
+  const getLink = (id: string, visibility: 'public' | 'private') => {
+    if (visibility === 'private' && !isLoggedIn) {
+      return '/login'; 
+    }
+    return `/read/${id}`; 
+  };
+  
 
   return (
     <>
@@ -21,14 +32,14 @@ export default async function Home() {
               <MediumCard
                 title={stories[0].title}
                 subtitle={stories[0].subtitle}
-                link={`/read/${stories[0].id}`}
+                link={getLink(stories[0].id, stories[0].visibility)}
               />
             )}
             {stories[1] && (
               <LargeCard
                 title={stories[1].title}
                 subtitle={stories[1].subtitle}
-                link={`/read/${stories[1].id}`}
+                link={getLink(stories[1].id, stories[1].visibility)}
               />
             )}
           </div>
@@ -38,7 +49,7 @@ export default async function Home() {
                 key={story.id}
                 title={story.title}
                 subtitle={story.subtitle}
-                link={`/read/${story.id}`}
+                link={getLink(story.id, story.visibility)}
               />
             ))}
           </div>
