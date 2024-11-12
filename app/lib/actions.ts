@@ -48,9 +48,9 @@ export async function authenticate(
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid credentials.';
+          return 'Credenciais Invalidas.';
         default:
-          return 'Something went wrong.';
+          return 'Erro no Servidor.';
       }
     }
     throw error;
@@ -58,12 +58,23 @@ export async function authenticate(
 }
 
 // Função para buscar todas as histórias
-export async function getStories() {
+const ITEMS_PER_PAGE = 8;
+
+export async function getStories(page: number, query: string) {
+  const offset = (page - 1) * ITEMS_PER_PAGE;
+
   const stories = await sql`
     SELECT id, title, subtitle, visibility, created_at
     FROM stories
-    ORDER BY created_at DESC;
+    WHERE
+          stories.title ILIKE ${`%${query}%`} OR
+          stories.subtitle ILIKE ${`%${query}%`} OR
+          stories.content ILIKE ${`%${query}%`}
+    ORDER BY created_at DESC
+    LIMIT ${ITEMS_PER_PAGE}
+    OFFSET ${offset};
   `;
+
   return stories.rows;
 }
 
@@ -159,4 +170,18 @@ export async function deleteStory(id: string) {
       }`
     );
   }
+}
+
+export async function authenticateUser(formData: FormData) {
+  const result = await signIn('credentials', {
+    redirect: false,
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
+
+  if (result?.error) {
+    throw new Error('Falha na autenticação');
+  }
+
+  redirect('/');
 }

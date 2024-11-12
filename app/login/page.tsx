@@ -5,26 +5,20 @@ import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import Logo from '@/app/ui/logo';
-import { authenticate } from '../lib/actions';
-import { useRouter } from 'next/navigation';
+import { authenticateUser } from '@/app/lib/actions';
 
 export default function Page() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
     try {
-      const error = await authenticate(undefined, formData);
-      if (error) {
-        setErrorMessage(error);
-      } else {
-        router.push('/');
-      }
+      await authenticateUser(formData);
     } catch (err) {
-      setErrorMessage(`Aconteceu um Erro. ${err}`);
+      console.error('Erro ao autenticar:', err);
+      setErrorMessage('Erro ao autenticar.');
     }
   };
 

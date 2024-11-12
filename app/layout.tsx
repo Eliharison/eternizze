@@ -1,6 +1,8 @@
 import '@/app/ui/global.css';
 import { comfortaa } from '@/app/ui/fonts';
 
+export const experimental_ppr = true;
+
 export const metadata = {
   title: 'Eternizze',
   description: 'Aqui você pode eternizar as suas historias!',
