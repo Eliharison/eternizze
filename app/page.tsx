@@ -2,24 +2,25 @@ import { getStories } from '@/app/lib/actions';
 import { fetchStoriesPages } from '@/app/lib/data';
 import { auth } from '@/auth';
 import { Card, MediumCard, LargeCard } from '@/app/ui/cards';
-import Navbar from './ui/navBar/navBar';
+import Navbar from '@/app/ui/navBar/navBar';
 import Pagination from '@/app/ui/pagination';
-import Header from './ui/header';
-import Banner from './ui/banner';
+import Header from '@/app/ui/header';
+import Banner from '@/app/ui/banner';
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-  };
-}) {
+type HomeProps = {
+  searchParams?: Promise<{
+    query?: string | string | undefined;
+    page?: string | string | undefined;
+  }>;
+};
+
+
+export default async function Home({ searchParams }: HomeProps) {
   const session = await auth();
   const isLoggedIn = !!session?.user;
 
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = (await searchParams)?.query || '';
+  const currentPage = Number((await searchParams)?.page) || 1;
 
   const stories = await getStories(currentPage, query);
   const totalPages = await fetchStoriesPages(query);
