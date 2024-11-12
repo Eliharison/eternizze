@@ -1,24 +1,39 @@
-import Header from '@/app/ui/header';
-import Banner from '@/app/ui/banner';
-import { Card, MediumCard, LargeCard } from '@/app/ui/cards';
 import { getStories } from '@/app/lib/actions';
-import { auth } from '../auth'; // Importe o `auth` diretamente
+import { fetchStoriesPages } from '@/app/lib/data';
+import { auth } from '@/auth';
+import { Card, MediumCard, LargeCard } from '@/app/ui/cards';
+import Navbar from './ui/navBar/navBar';
+import Pagination from '@/app/ui/pagination';
+import Header from './ui/header';
+import Banner from './ui/banner';
 
-export default async function Home() {
-  const stories = await getStories();
-  const session = await auth(); // Verifica a sessão autenticada
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const session = await auth();
   const isLoggedIn = !!session?.user;
+
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const stories = await getStories(currentPage, query);
+  const totalPages = await fetchStoriesPages(query);
 
   const getLink = (id: string, visibility: 'public' | 'private') => {
     if (visibility === 'private' && !isLoggedIn) {
-      return '/login'; 
+      return '/login';
     }
-    return `/read/${id}`; 
+    return `/read/${id}`;
   };
-  
 
   return (
     <>
+      <Navbar />
       <Header />
       <div className="px-5 pb-5 xl:p-0">
         <Banner
@@ -54,6 +69,7 @@ export default async function Home() {
             ))}
           </div>
         </main>
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </div>
     </>
   );
