@@ -1,6 +1,6 @@
 import { quicksand } from '@/app/ui/fonts';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 interface CardProps {
   title: string;
@@ -32,7 +32,7 @@ export function Card({ title, subtitle, link }: CardProps) {
   );
 }
 
-export function MediumCard({ title, subtitle, link }: CardProps) {
+export function MediumCard({ title, subtitle, link}: CardProps) {
   return (
     <Link href={link} passHref>
       <div className="relative flex-grow lg:flex-grow-0 lg:w-[525px] h-[215px] rounded-[25px] shadow-custom overflow-hidden group transition-transform duration-300 hover:scale-105">

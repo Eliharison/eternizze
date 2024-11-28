@@ -30,6 +30,7 @@ const config: Config = {
       '2xl': '32px',
       '3xl': '36px',
       '4xl': '48px',
+      '8xl': '96px',
       '10xl': '128px',
     },
   },
