@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 8;
 
 export async function fetchStoriesPages(query: string) {
   try {
