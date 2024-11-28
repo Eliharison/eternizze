@@ -45,8 +45,10 @@ export default function NavbarLogic({
       </div>
 
       {/* Barra de pesquisa e botão de Login/Sair */}
+
+      {/* Adicionar xl:block após pronto */}
       <div className="flex space-x-4 items-center">
-        {isHomePage && <div className="hidden xl:block">{children}</div>}
+        {isHomePage && <div className="hidden ">{children}</div>}
         {loginButton}
       </div>
     </div>
